@@ -10,6 +10,7 @@
   <title>Feedbox: a dropbox for RSS feeds</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="/feedbox.js"></script>
 </head>
 
@@ -25,6 +26,28 @@
   }
   </style>
 
+  <script>
+  $.fn.extend({
+    toggleHelp: function() {
+    return this.each(function() {
+      var button = this;
+      $(button).toggleClass('is-expanded');
+
+      if ( $(button).parent('.form-row').length > 0 ) {
+        $(button).siblings('.help__container').toggle();
+      } else {
+        $(button).parent().siblings('.help__container').toggle();
+      }
+    });
+  }
+  });
+  $(document).ready(function() {
+    $(document).on('click', ".js-toggle-help", function(s) {
+      s.preventDefault(), 
+      $(this).toggleHelp();
+    })
+  });
+  </script>
 
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -113,18 +136,34 @@
           <div class="box__content" ng-controller="AddFeedController as addFeed">
             <form ng-submit="addFeed.subscribe()" method="post" >
               <div class="form-row">
+
                 <label class="form__label" for="url">Feed URL</label>
                 <input class="form__input  input--text" id="url" name="url" ng-model="addFeed.url" type="text">
-              </div>
+
+                </div>
 
               <div class="form-row">
+                <div class="help__container  form__help  help--form">
+                  <p class="help__text">
+                    Please use your Tracker login. We just ask this to prevent spam.
+                  </p>
+                </div>
+
                 <label class="form__label" for="url">Login</label>
                 <input class="form__input  input--text" id="login" name="login" ng-model="addFeed.login" type="text">
+                <a class="button  button--help  help__button  js-toggle-help" href="#">?<div></div></a>
               </div>
 
               <div class="form-row">
+                <div class="help__container  form__help  help--form">
+                  <p class="help__text">
+                    Please use a token which allows for subscriptions. We just ask this to prevent spam.
+                  </p>
+                </div>
+
                 <label class="form__label" for="url">Token</label>
                 <input class="form__input  input--text" id="token" name="token" ng-model="addFeed.token" type="text">
+                <a class="button  button--help  help__button  js-toggle-help" href="#">?<div></div></a>
               </div>
 
               <div class="form-row form-row--form-actions">
