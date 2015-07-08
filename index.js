@@ -18,11 +18,9 @@ var server = new Hapi.Server({
 });
 
 server.connection({ 
-  host: 'localhost', 
+  host: '0.0.0.0', 
   port: process.env.PORT || 8000 
 });
-
-
 
 server.register(Basic, function (err) {
   server.auth.strategy('simple', 'basic', { 
@@ -84,8 +82,6 @@ server.route({
     }
   }
 });
-
-
 
 // Start the server
 server.start();
