@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="feedbox">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="description" content="Feedbox: a dropbox for RSS feeds which you'd like to see in Superfeedr's track feed coverage." />
+  <meta name="keywords" content="tracking keywords, superfeedr, coverage, expanding, popular feeds, all feeds" />
+  <link href="https://push.superfeedr.com/assets/front.css" media="screen, projection" rel="stylesheet" />
+  <link href="https://push.superfeedr.com/assets/prism.css" media="screen, projection" rel="stylesheet" />
+  <title>Feedbox: a dropbox for RSS feeds</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script src="/feedbox.js"></script>
+</head>
+
+
+<body>
+
+  <style>
+  .overlay {
+    background: url(https://push.superfeedr.com/assets/ajax-loader.gif) 50% no-repeat,50% rgba(0,0,0,.7);
+  }
+  pre[data-line] {
+    padding: 0.5em 1em 0.5em 1em;
+  }
+  </style>
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-9285763-1', 'auto');
+  ga('send', 'pageview');
+  </script>
+
+  <div style="display: none">
+    <!-- Google Code for Remarketing Tag -->
+    <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 984056007;
+    var google_custom_params = window.google_tag_params;
+    var google_remarketing_only = true;
+    /* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+      <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/984056007/?value=0&amp;guid=ON&amp;script=0"/>
+      </div>
+    </noscript>
+  </div>
+
+  <header class="header" >
+    <div class="container">
+      <h1 class="header-logo">
+        <a  title="Superfeedr Home" href="https://superfeedr.com/">
+          <img alt="Logo" src="https://push.superfeedr.com/assets/logo.svg" /> <span>Superfeedr</span>
+        </a>
+      </h1>
+      <nav class="nav-header">
+        <ul class="nav-items">
+          <li class="nav-item">
+            <a class="nav-link" href="https://superfeedr.com/publisher">Publishers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://superfeedr.com/subscriber">Subscribers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://superfeedr.com/tracker">Trackers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://superfeedr.com/pricing">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-bubble" href="https://superfeedr.com/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-bubble" href="https://superfeedr.com/users/new">Sign Up</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+ 
+  <main class="container body">
+
+
+    <header class="body-header">
+      <h2><strong>The Feedbox</strong></h2>
+    </header>
+
+    <div class="body-content">
+      <section class="column  column--primary  body-content-text">
+        <p class="body-content-text-focus">The Feedbox is a dropbox for feeds.</p>
+        <p>Our tracking feeds let <a href="https://superfeedr.com/tracker">trackers</a> subscribe to keywords and complex boolean expressions accross the open web.</p>
+        <p>We try hard to provide the <strong>largest coverage</strong> but sometimes, we miss some feeds which can be pretty important to you.</p>
+        <p>Of course, we filter <em>porn, spam and broken feeds</em>, but we also <a href="http://blog.superfeedr.com/feed-popularity/">assert their popularity</a>. The feedbox will easily get rid of the spam, porn and broken feeds and will only <strong>keep the popular ones</strong>.</p>
+      </section>
+
+
+      <div class="column  column--secondary">
+        <section class="box body-box-top">
+          <header class="box__header">
+            <h1 class="box__title">Add a feed</h1>
+          </header>
+
+          
+          <div class="box__content" ng-controller="AddFeedController as addFeed">
+            <form ng-submit="addFeed.subscribe()" method="post" >
+              <div class="form-row">
+                <label class="form__label" for="url">Feed URL</label>
+                <input class="form__input  input--text" id="url" name="url" ng-model="addFeed.url" type="text">
+              </div>
+
+              <div class="form-row">
+                <label class="form__label" for="url">Login</label>
+                <input class="form__input  input--text" id="login" name="login" ng-model="addFeed.login" type="text">
+              </div>
+
+              <div class="form-row">
+                <label class="form__label" for="url">Token</label>
+                <input class="form__input  input--text" id="token" name="token" ng-model="addFeed.token" type="text">
+              </div>
+
+              <div class="form-row form-row--form-actions">
+                <input class="button button--raised button--positive" name="commit" value="Add Feed" type="submit"> 
+              </div>
+            </form>
+           
+          <div ng-class="{overlay: addFeed.loading}"></div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="body-content">
+      <section class="column  column--primary  body-content-text">
+        <p class="body-content-text-focus">How-to</p>
+
+        <p>Send a <code>POST</code> request to <code>http://feedbox.superfeedr.com/susbcribe</code> with a single parameter: <code>hub.topic</code> for the feed URL you want to add to the feedbox.
+
+        <p>We ask that you supply your <a href="https://superfeedr.com/tracker">Superfeedr Tracker</a> login (and a token) to prevent spam. The feed is <strong>not</strong> added to your account.</p>
+
+
+        <pre class="less-padding language-bash" data-line=""><code>curl -X POST https://feedbox.superfeedr.com/ 
+-u tracker:tracker-token 
+-d'hub.topic=http://push-pub.appspot.com/feed' 
+</code></pre>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <div class="footer container">
+    <footer class="site-footer">
+      <div class="site-footer__block">
+        <a href="https://superfeedr.com/" class="site-footer__logo"><img alt="Logo invert" src="https://push.superfeedr.com/assets/logo-invert.svg"></a>
+        <p class="site-footer__copyright"><span>Superfeedr</span><br>&copy; 2009–2015</p>
+      </div>
+      <ul class="site-footer__block site-footer__list">
+        <li class="site-footer__item"><strong>Superfeedr</strong></li>
+        <li class="site-footer__item"><a class="site-footer__link" href="https://superfeedr.com/about">About</a></li>
+        <li class="site-footer__item"><a class="site-footer__link" href="https://superfeedr.com/pricing">Pricing</a></li>
+        <li class="site-footer__item"><a class="site-footer__link" href="https://superfeedr.com/terms">Terms</a></li>
+      </ul>
+      <ul class="site-footer__block site-footer__list">
+        <li class="site-footer__item"><strong>For developers</strong></li>
+        <li class="site-footer__item"><a class="site-footer__link" href="http://documentation.superfeedr.com/">Documentation</a></li>
+        <li class="site-footer__item"><a class="site-footer__link" href="https://github.com/superfeedr/">Code Libraries</a></li>
+        <li class="site-footer__item"><a class="site-footer__link" href="https://github.com/superfeedr/documentation/issues">Support</a> <a href="" class="site-footer__link"></a></li>
+      </ul>
+      <ul class="site-footer__block site-footer__list">
+        <li class="site-footer__item"><strong>Connect with us</strong></li>
+        <li class="site-footer__item"><a class="site-footer__link" href="https://superfeedr.com/about">Contact Us</a></li>
+        <li class="site-footer__item"><a class="site-footer__link" href="mailto:info@superfeedr.com">Email</a> </li>
+        <li class="site-footer__item"><a class="site-footer__link" href="https://twitter.com/superfeedr">Twitter</a> </li>
+      </ul>
+    </footer> 
+  </div>
+
+  <script src="https://push.superfeedr.com/assets/prism.js">
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
