@@ -91,7 +91,7 @@ app.controller('AddFeedController', ['$http', '$window', 'Base64', function($htt
 
   addFeed.loading = false;
   addFeed.login = "tracker";
-  addFeed.token = "af4689383ace17e64e4e3c1df66213e8";
+  addFeed.token = "token";
   addFeed.url = "http://blog.superfeedr.com/atom.xml";
 
   addFeed.subscribe = function() {
