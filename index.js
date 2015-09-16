@@ -72,12 +72,15 @@ server.route({
   config: {
     auth: 'simple',
     handler: function (request, reply) {
-      superfeedr.subscribe(request.payload['hub.topic'], function(err, data) {
-        if(!err)
-          return reply('Thank you! ' + request.payload['hub.topic'] + ' has been added to Superfeedr\'s set of feeds.\n');
 
-        console.error('Failed to add ' + request.payload['hub.topic'] + ' ' + err);
-        return reply('We could not add ' + request.payload['hub.topic']);
+      console.log(request.payload)
+      var topic = request.payload['hub.topic'] || request.payload['hub']['topic'];
+      superfeedr.subscribe(topic, function(err, data) {
+        if(!err)
+          return reply('Thank you! ' + topic + ' has been added to Superfeedr\'s set of feeds.\n');
+
+        console.error('Failed to add ' + topic + ' ' + err);
+        return reply('We could not add ' + topic);
       });
     }
   }
