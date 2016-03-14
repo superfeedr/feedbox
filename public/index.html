@@ -5,13 +5,19 @@
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
   <meta name="description" content="Feedbox: a dropbox for RSS feeds which you'd like to see in Superfeedr's track feed coverage." />
   <meta name="keywords" content="tracking keywords, superfeedr, coverage, expanding, popular feeds, all feeds" />
-  <link href="https://push.superfeedr.com/assets/front.css" media="screen, projection" rel="stylesheet" />
-  <link href="https://push.superfeedr.com/assets/prism.css" media="screen, projection" rel="stylesheet" />
+
+  <link href="//assets.superfeedr.com/assets/css/global.css" rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,400italic%7CSource+Code+Pro:400,600" rel="stylesheet" type="text/css">
+
+  <link rel="shortcut icon" href="//assets.superfeedr.com/assets/img/favicon.png">
+
   <title>Feedbox: a dropbox for RSS feeds</title>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
-  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="/feedbox.js"></script>
+
+
 </head>
 
 
@@ -43,7 +49,7 @@
   });
   $(document).ready(function() {
     $(document).on('click', ".js-toggle-help", function(s) {
-      s.preventDefault(), 
+      s.preventDefault(),
       $(this).toggleHelp();
     })
   });
@@ -77,13 +83,16 @@
     </noscript>
   </div>
 
-  <header class="header" >
-    <div class="container">
-      <h1 class="header-logo">
-        <a  title="Superfeedr Home" href="https://superfeedr.com/">
-          <img alt="Logo" src="https://push.superfeedr.com/assets/logo.svg" /> <span>Superfeedr</span>
+  <header class="header">
+    <div class="container container--front">
+
+      <div class="header-logo">
+        <a title="Superfeedr Home" href="/">
+          <img alt="Logo" src="//assets.superfeedr.com/assets/img/logo.svg">
+          <span>Superfeedr Blog</span>
         </a>
-      </h1>
+      </div>
+
       <nav class="nav-header">
         <ul class="nav-items">
           <li class="nav-item">
@@ -103,13 +112,12 @@
           </li>
           <li class="nav-item">
             <a class="nav-link nav-link-bubble" href="https://superfeedr.com/users/new">Sign Up</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+          </li></ul>
+        </nav>
+      </div>
   </header>
 
- 
+
   <main class="container body">
 
 
@@ -132,7 +140,7 @@
             <h1 class="box__title">Add a feed</h1>
           </header>
 
-          
+
           <div class="box__content" ng-controller="AddFeedController as addFeed">
             <form ng-submit="addFeed.subscribe()" method="post" >
               <div class="form-row">
@@ -167,10 +175,10 @@
               </div>
 
               <div class="form-row form-row--form-actions">
-                <input class="button button--raised button--positive" name="commit" value="Add Feed" type="submit"> 
+                <input class="button button--raised button--positive" name="commit" value="Add Feed" type="submit">
               </div>
             </form>
-           
+
           <div ng-class="{overlay: addFeed.loading}"></div>
           </div>
         </section>
@@ -187,8 +195,8 @@
 
 
         <pre class="less-padding language-bash" data-line=""><code>curl -X POST https://feedbox.superfeedr.com/subscribe
--u tracker:tracker-token 
--d'hub.topic=http://push-pub.appspot.com/feed' 
+-u tracker:tracker-token
+-d'hub.topic=http://push-pub.appspot.com/feed'
 </code></pre>
 
       </section>
@@ -200,8 +208,8 @@
   <div class="footer container">
     <footer class="site-footer">
       <div class="site-footer__block">
-        <a href="https://superfeedr.com/" class="site-footer__logo"><img alt="Logo invert" src="https://push.superfeedr.com/assets/logo-invert.svg"></a>
-        <p class="site-footer__copyright"><span>Superfeedr</span><br>&copy; 2009–2015</p>
+        <a href="/" class="site-footer__logo"><img alt="Logo invert" src="/images/logo-invert.svg"></a>
+        <p class="site-footer__copyright"><span>Superfeedr</span>&copy;</p>
       </div>
       <ul class="site-footer__block site-footer__list">
         <li class="site-footer__item"><strong>Superfeedr</strong></li>
@@ -221,11 +229,8 @@
         <li class="site-footer__item"><a class="site-footer__link" href="mailto:info@superfeedr.com">Email</a> </li>
         <li class="site-footer__item"><a class="site-footer__link" href="https://twitter.com/superfeedr">Twitter</a> </li>
       </ul>
-    </footer> 
+    </footer>
   </div>
-
-  <script src="https://push.superfeedr.com/assets/prism.js">
-  </script>
 
 </body>
 </html>
